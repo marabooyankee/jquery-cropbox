@@ -47,7 +47,8 @@
         var defaultControls = $('<div/>', { 'class' : 'cropControls' })
               .append($('<span>Drag to crop</span>'))
               .append($('<a/>', { 'class' : 'cropZoomIn' }).on('click', $.proxy(this.zoomIn, this)))
-              .append($('<a/>', { 'class' : 'cropZoomOut' }).on('click', $.proxy(this.zoomOut, this)));
+              .append($('<a/>', { 'class' : 'cropZoomOut' }).on('click', $.proxy(this.zoomOut, this)))
+              .append($('<a/>',{'class':'cropReset'}).on('click',$.proxy(this.reset,this)));
 
         this.$frame.append(this.options.controls || defaultControls);
         this.updateOptions();
@@ -201,6 +202,9 @@
 
         this.$image.css({ width: this.img_width, left: this.img_left, top: this.img_top });
         this.update();
+      },
+      reset:function(){
+        this.zoom(0);
       },
       zoomIn: function() {
         this.zoom(this.percent + (1 - this.minPercent) / (this.options.zoom - 1 || 1));
